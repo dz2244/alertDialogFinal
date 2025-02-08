@@ -7,7 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -16,9 +18,11 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     AlertDialog.Builder adb;
-    Button btnT, btnTI, btnTI1, btnTI2, btnNext;
+    Button btnT, btnTI, btnTI1, btnTI2 ;
     LinearLayout screen;
     Random random = new Random();
+    int[] colors = {Color.RED, Color.GREEN, Color.BLUE};
+    int color1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,155 +32,101 @@ public class MainActivity extends AppCompatActivity {
         btnTI = findViewById(R.id.btnTI);
         btnTI1 = findViewById(R.id.btnTI1);
         btnTI2 = findViewById(R.id.btnTI2);
-        btnNext = findViewById(R.id.btnNext);
         screen = findViewById(R.id.screen);
     }
 
-    public void clickedBtnT(View view) {
+    public void clickedBtnColors(View view) {
         adb = new AlertDialog.Builder(this);
         adb.setTitle("text.");
         adb.setMessage("This is text");
-        adb.show();
+        adb.setPositiveButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        adb.setNegativeButton("switchColor", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (screen != null) {
+                    color1 = colors[random.nextInt(3)];
+                    screen.setBackgroundColor(color1);
+                }
+            }
+        });
+        AlertDialog ad = adb.create();
+        ad.show();
     }
 
 
-    public void clickedBtnTI(View view) {
+    public void clickedBtnColorsChoice(View view) {
         adb = new AlertDialog.Builder(this);
         adb.setTitle("text.1");
         adb.setMessage("This is text1");
-        adb.setIcon(R.drawable.flag1);
-        AlertDialog ad = adb.create();
-        ad.show();
-    }
+        adb.setCancelable(false);
 
+        int[] color = new int[] {0, 0, 0};
 
-    public void clickedBtnTI1(View view) {
-        adb = new AlertDialog.Builder(this);
-        adb.setTitle("text.2");
-        adb.setMessage("This is text2");
-        adb.setIcon(R.drawable.flag1);
+        final String[] colors = {"Red", "Green", "Blue"};
 
-        adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        adb.setTitle("Change multiple colors");
+        adb.setMultiChoiceItems(colors, null, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        AlertDialog ad = adb.create();
-        ad.show();
-    }
-
-    public void clickedBtnTI2(View view) {
-        adb = new AlertDialog.Builder(this);
-        adb.setTitle("text.3");
-        adb.setMessage("This is text3");
-        adb.setIcon(R.drawable.flag1);
-
-        adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        adb.setNegativeButton("editColor", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (screen != null) {
-                    changeBackgroundColor();
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                if (isChecked) {
+                    color[which] = 255;
+                } else {
+                    color[which] = 0;
                 }
             }
         });
 
-        AlertDialog ad = adb.create();
-        ad.show();
-    }
-
-
-    public void clickedBtnTI3(View view) {
-        adb = new AlertDialog.Builder(this);
-        adb.setTitle("text.3");
-        adb.setMessage("This is text3");
-        adb.setIcon(R.drawable.flag1);
-
-        adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        adb.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int i) {
                 dialog.cancel();
             }
         });
 
-        adb.setNeutralButton("edit", new DialogInterface.OnClickListener() {
+        adb.setNeutralButton("chose" , new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (screen != null) {
-                    changeBackgroundColor();
-                }
+                screen.setBackgroundColor(Color.rgb(color[0], color[1], color[2]));
             }
         });
 
-        adb.setNegativeButton("reset", new DialogInterface.OnClickListener() {
+            AlertDialog ad = adb.create();
+            ad.show();
+    }
+
+
+    public void clickedBtnReset(View view) {
+        screen.setBackgroundColor(Color.WHITE);
+    }
+
+    public void clickedBtnToast(View view) {
+        adb = new AlertDialog.Builder(this);
+        adb.setTitle("text.3");
+        final EditText eTad = new EditText(this);
+        eTad.setHint("Enter text");
+        adb.setView(eTad);
+
+        adb.setPositiveButton ("Copy", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                resetBackgroundColor();
+                String str = eTad.getText().toString();
+                Toast.makeText(MainActivity.this, str, Toast.LENGTH_SHORT).show();
+
+                adb.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog ad = adb.create();
+                ad.show();
             }
         });
-
-        AlertDialog ad = adb.create();
-        ad.show();
-    }
-
-
-    public void changeBackgroundColor() {
-        int color1 = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
-        int color2 = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
-        int color3 = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
-        int color4 = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
-        int color5 = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
-        int color6 = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
-
-        if (screen != null) {
-            screen.setBackgroundColor(color1);
-        }
-
-        btnT.setBackgroundColor(color2);
-        btnTI.setBackgroundColor(color3);
-        btnTI1.setBackgroundColor(color4);
-        btnTI2.setBackgroundColor(color5);
-        btnNext.setBackgroundColor(color6);
-    }
-
-
-    public void resetBackgroundColor() {
-        int color = Color.rgb(255, 255, 255);
-        if (screen != null) {
-            screen.setBackgroundColor(color);
-        }
-
-        int color1 = Color.rgb(200, 200, 200);
-        btnT.setBackgroundColor(color1);
-        btnTI.setBackgroundColor(color1);
-        btnTI1.setBackgroundColor(color1);
-        btnTI2.setBackgroundColor(color1);
-        btnNext.setBackgroundColor(color1);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@Nullable MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.mCredits) {
-            Intent si = new Intent(this, activityCredits.class);
-            startActivity(si);
-        }
-
-        return true;
-    }
+    };
 }

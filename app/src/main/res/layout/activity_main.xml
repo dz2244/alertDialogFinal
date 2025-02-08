@@ -25,8 +25,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:onClick="clickedBtnT"
-            android:text="text" />
+            android:onClick="clickedBtnColors"
+            android:text="random" />
 
         <Space
             android:layout_width="0dp"
@@ -38,8 +38,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:onClick="clickedBtnTI"
-            android:text="text / ima" />
+            android:onClick="clickedBtnColorsChoice"
+            android:text="choice" />
     </LinearLayout>
 
     <LinearLayout
@@ -58,8 +58,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:onClick="clickedBtnTI1"
-            android:text="text / ima / b" />
+            android:onClick="clickedBtnReset"
+            android:text="reset" />
 
         <Space
             android:layout_width="0dp"
@@ -77,22 +77,14 @@
             android:id="@+id/btnTI2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:onClick="clickedBtnTI2"
-            android:text="text / ima / 2b" />
+            android:layout_weight="1"
+            android:onClick="clickedBtnToast"
+            android:text="Toast" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/btnTI3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:onClick="clickedBtnTI3"
-            android:text="text / ima / 3b" />
 
     </LinearLayout>
 
