@@ -8,23 +8,16 @@
     android:orientation="vertical"
     tools:context=".activityCredits">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="216dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="im the best" />
-
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:onClick="clickedBack"
-        android:text="back" />
+        android:layout_weight="1"
+        android:text="im the best" />
+
 </LinearLayout>

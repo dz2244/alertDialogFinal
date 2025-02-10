@@ -4,10 +4,9 @@
 
     <item
         android:id="@+id/credits"
-        android:onClick="clickedCredits"
         android:title="credits" />
+
     <item
         android:id="@+id/main"
-        android:onClick="clickedMain"
         android:title="main" />
 </menu>

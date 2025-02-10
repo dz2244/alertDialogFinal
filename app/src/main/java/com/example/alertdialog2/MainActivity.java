@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         adb.setMessage("hello");
 
         final String[] colors = {"Red", "Green", "Blue"};
-
         int[] color = new int[]{0, 0, 0};
 
         adb.setTitle("List of colors - one choice");
@@ -177,12 +176,12 @@ public class MainActivity extends AppCompatActivity {
      * @param menu the options menu.
      * @return true if the menu is successfully created.
      */
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
     /**
      * Handles the selection of menu items.
      * Navigates to the credits activity when the corresponding menu item is selected.
