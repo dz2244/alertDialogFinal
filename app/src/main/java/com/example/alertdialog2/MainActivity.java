@@ -18,14 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-
-    // Declaration of AlertDialog and UI elements
-    AlertDialog.Builder adb;
+    AlertDialog.Builder adb ;
     Button btnT, btnTI, btnTI1, btnTI2;
     LinearLayout screen;
-    Random random = new Random();
-    int[] colors = {Color.RED, Color.GREEN, Color.BLUE};
-    int color1;
+
 
     /**
      * Initializes the activity, sets the layout, and links UI elements.
@@ -52,12 +48,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void clickedBtnColors(View view) {
         adb = new AlertDialog.Builder(this);
-        adb.setTitle("random message");
-        adb.setMessage("hello");
-
+        adb.setTitle("SKIBIDI");
+        adb.setMessage("SIGMA");
         final String[] colors = {"Red", "Green", "Blue"};
         int[] color = new int[]{0, 0, 0};
-
+        adb = new AlertDialog.Builder(this);
         adb.setTitle("List of colors - one choice");
         adb.setItems(colors, new DialogInterface.OnClickListener() {
             @Override
@@ -66,14 +61,12 @@ public class MainActivity extends AppCompatActivity {
                 screen.setBackgroundColor(Color.rgb(color[0], color[1], color[2]));
             }
         });
-
         adb.setNegativeButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
-
         adb.setCancelable(false);
         AlertDialog ad = adb.create();
         ad.show();
@@ -87,18 +80,23 @@ public class MainActivity extends AppCompatActivity {
      */
     public void clickedBtnColorsChoice(View view) {
         adb = new AlertDialog.Builder(this);
-        adb.setTitle("text.");
-        adb.setMessage("This is text");
+        adb.setTitle("SKIBIDI");
+        adb.setMessage("SIGMA");
         final String[] colors = {"Red", "Green", "Blue"};
         int[] color = new int[]{0, 0, 0};
-
+        adb = new AlertDialog.Builder( this);
         adb.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
-
+        adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                screen.setBackgroundColor(Color.rgb(color[0], color[1], color[2]));
+            }
+        });
         adb.setMultiChoiceItems(colors, null, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -106,24 +104,8 @@ public class MainActivity extends AppCompatActivity {
                 else if (color[which] == 255) color[which] = 0;
             }
         });
-
-        adb.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        adb.setNegativeButton("ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                screen.setBackgroundColor(Color.rgb(color[0], color[1], color[2]));
-            }
-        });
-
-        adb.setCancelable(false);
         AlertDialog ad = adb.create();
+        ad.setCancelable(false);
         ad.show();
     }
 
@@ -144,13 +126,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void clickedBtnToast(View view) {
         adb = new AlertDialog.Builder(this);
-        adb.setTitle("text.3");
-
+        adb.setTitle("SKIBIDI");
         final EditText eTad = new EditText(this);
-        adb.setMessage("This is text1");
+        adb.setMessage("SIGMA");
         eTad.setHint("Enter text");
         adb.setView(eTad);
-
         adb.setPositiveButton("enter", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -167,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         AlertDialog ad = adb.create();
+        ad.setCancelable(false);
         ad.show();
     }
 
@@ -177,14 +158,13 @@ public class MainActivity extends AppCompatActivity {
      * @return true if the menu is successfully created.
      */
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
     /**
-     * Handles the selection of menu items.
-     * Navigates to the credits activity when the corresponding menu item is selected.
+     * Handles selection of menu items.
      *
      * @param item the selected menu item.
      * @return true if the item is successfully handled.
@@ -194,12 +174,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.credits) {
-            Intent intent = new Intent(this, activityCredits.class);
-            startActivity(intent);
-            return true;
+            Intent si = new Intent(this, activityCredits.class);
+            startActivity(si);
         }
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
 }
